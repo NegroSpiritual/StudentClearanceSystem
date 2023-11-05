@@ -5,6 +5,7 @@
 				<li>
                     <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Account</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
+                    <li><a href="profile.php" target="_blank" > My Profile</a></li>
                  <li><a href="edit-photo.php">Edit Photo</a></li>
 				  <li><a href="changepassword.php">Change Password</a></li>
 
@@ -16,7 +17,11 @@
                     <ul class="nav nav-second-level collapse">
                  <li><a href="pay-fee.php">Pay fee</a></li>
 				  <li><a href="fee-history.php">payment History</a></li>
+                
                     </ul>
+                    <li>
+                    <a href="logout.php"><i class="fa fa-sign-out"></i> Log out </a>
+                </li>
                 </li>
 
 			    
