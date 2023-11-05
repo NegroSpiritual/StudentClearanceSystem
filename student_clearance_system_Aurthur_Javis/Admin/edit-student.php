@@ -211,14 +211,28 @@ if (isset($_GET['edit']) && $_GET['edit'] == 1) {
             <label for="txtsession">Session</label>
             <input type="text" class="form-control" name="txtsession" id="txtsession" size="77" value="<?php echo $row['session']; ?>" placeholder="Enter Session">
         </div>
-        <div class="form-group">
-            <label for="txtfaculty">Faculty</label>
-            <input type="text" class="form-control" name="txtfaculty" id="txtfaculty" size="77" value="<?php echo $row['faculty']; ?>" placeholder="Enter Faculty">
-        </div>
-        <div class="form-group">
-            <label for="txtdept">Department</label>
-            <input type="text" class="form-control" name="txtdept" id="txtdept" size="77" value="<?php echo $row['dept']; ?>" placeholder="Enter Department">
-        </div>
+          <div class="form-group">
+    <label for="txtfaculty">Faculty</label>
+    <select name="txtfaculty" class="form-control">
+        <option value="Select faculty">Select faculty</option>
+        <option value="Science"<?php if ($row['faculty'] === 'Science') echo ' selected'; ?>>Science</option>
+        <option value="Engineering"<?php if ($row['faculty'] === 'Engineering') echo ' selected'; ?>>Engineering</option>
+        <option value="Social Science"<?php if ($row['faculty'] === 'Social Science') echo ' selected'; ?>>Social Science</option>
+        <!-- Add more faculty options as needed -->
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="txtdept">Department</label>
+    <select name="txtdept" class="form-control">
+        <option value="Select Department">Select Department</option>
+        <option value="Computer Science"<?php if ($row['dept'] === 'Computer Science') echo ' selected'; ?>>Computer Science</option>
+        <option value="Electrical Engineering"<?php if ($row['dept'] === 'Electrical Engineering') echo ' selected'; ?>>Electrical Engineering</option>
+        <option value="Business Management"<?php if ($row['dept'] === 'Business Management') echo ' selected'; ?>>Business Management</option>
+        <option value="Information Technology"<?php if ($row['dept'] === 'Information Technology') echo ' selected'; ?>>Information Technology</option>
+        <!-- Add more department options as needed -->
+    </select>
+</div>
         <div class="form-group">
             <label for="txtphone">Phone</label>
             <input type="text" class="form-control" name="txtphone" id="txtphone" size="77" value="<?php echo $row['phone']; ?>" placeholder="Enter Phone">
