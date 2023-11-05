@@ -93,7 +93,7 @@ $current_date = date('Y-m-d H:i:s');
                             <p align="right" class="style2">
                                 SIGNED</p>
                             <p align="right">&nbsp;</p>
-                            <p align="right"><strong>REGISTRA                            </strong></p>
+                            <p align="right"><strong>REGISTRATION                            </strong></p>
                             <hr>
                             <div class="row">
                               <div align="center"><a href="#" id="print-button" onclick="window.print();return false;">Print this page</a> </div>
