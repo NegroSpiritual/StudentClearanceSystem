@@ -230,7 +230,7 @@ else {return false;
                                           $sql = "SELECT * FROM students order by ID ASC";
                                            $result = $conn->query($sql);
                                            while($row = $result->fetch_assoc()) { ?>
-                      <tr class="gradeX">
+                          <tr class="gradeX">
                         <td height="104"><div align="center"><?php echo $row['fullname']; ?> </div></td>
 					 <td><div align="center"><span class="controls"><img src="../<?php echo $row['photo'];?>"  width="91" height="73" border="2"/></span></div></td>
                         <td><div align="center"><?php echo $row['phone']; ?></div></td>
@@ -238,17 +238,18 @@ else {return false;
                         <td><div align="center"><?php echo $row['password']; ?></div></td>
                         <td><div align="center"><?php echo $row['faculty']; ?></div></td>
                         <td><div align="center"><?php echo $row['dept']; ?></div></td>
-                        <td>     <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-flat">Action</button>
-                    <button type="button" class="btn btn-danger btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu" role="menu">
-                      <a class="dropdown-item" href="delete-student.php?id=<?php echo $row['ID'];?>" onClick="return deldata('<?php echo $row['fullname']; ?> ');">Delete</a>
-					 
-                    </div>
-                  </div>
-                </td>
+                       <td>
+                            <div class="btn-group">
+                            <a href="edit-student.php?id=<?php echo $row['ID']; ?>&edit=1" target="_blank" class="btn btn-primary btn-flat" name="edit_student">Edit</a>
+                              <button type="button" class="btn btn-danger btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                <span class="sr-only">Toggle Dropdown</span>
+                              </button>
+                              <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="delete-student.php?id=<?php echo $row['ID']; ?>" onClick="return deldata('<?php echo $row['fullname']; ?> ');">Delete</a>
+                              </div>
+                            </div>
+                          </td>
+
                     </tr>
 					<?php } ?>
                     </tbody>
