@@ -21,28 +21,51 @@ $result = $conn->query($sql);
 $rowaccess= mysqli_fetch_array($result);
 
 if (isset($_GET['edit']) && $_GET['edit'] == 1) {
-  if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-      $student_id = $_GET['id'];
+ if (isset($_GET['edit']) && $_GET['edit'] == 1) {
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $student_id = $_GET['id'];
 
-      // Fetch student information from the database based on the provided student ID
-      $sql = "SELECT * FROM students WHERE ID = $student_id";
-      $result = $conn->query($sql);
+        // Fetch student information from the database based on the provided student ID
+        $sql = "SELECT * FROM students WHERE ID = $student_id";
+        $result = $conn->query($sql);
 
-      if ($result->num_rows == 1) {
-          $row = $result->fetch_assoc();
-          $fullname = $row['fullname'];
-          $matric_no = $row['matric_no'];
-          $password = $row['password'];
-          $session = $row['session'];
-          $faculty = $row['faculty'];
-          $dept = $row['dept'];
-          $phone = $row['phone'];
-      } else {
-          // Handle the case where the student with the provided ID doesn't exist
-          echo "Student not found. Please check the student ID.";
-      }
-  }
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $fullname = $row['fullname'];
+            $matric_no = $row['matric_no'];
+            $password = $row['password'];
+            $session = $row['session'];
+            $faculty = $row['faculty'];
+            $dept = $row['dept'];
+            $phone = $row['phone'];
+        } else {
+            // Handle the case where the student with the provided ID doesn't exist
+            echo "Student not found. Please check the student ID.";
+        }
+    }
 }
+
+// Now, outside of the retrieval logic, handle the form submission and update
+if (isset($_POST['edit-student'])) {
+    $fullname = mysqli_real_escape_string($conn, $_POST['txtfullname']);
+    $matric_no = mysqli_real_escape_string($conn, $_POST['txtmatric']);
+    $password = mysqli_real_escape_string($conn, $_POST['txtpassword']);
+    $session = mysqli_real_escape_string($conn, $_POST['txtsession']);
+    $faculty = mysqli_real_escape_string($conn, $_POST['txtfaculty']);
+    $dept = mysqli_real_escape_string($conn, $_POST['txtdept']);
+    $phone = mysqli_real_escape_string($conn, $_POST['txtphone']);
+
+    // Update the student's information in the database
+    $updateSql = "UPDATE students SET fullname='$fullname', matric_no='$matric_no', password='$password', session='$session', faculty='$faculty', dept='$dept', phone='$phone' WHERE ID = $student_id";
+
+    if (mysqli_query($conn, $updateSql)) {
+        // Redirect to the student record page after successful update
+        header("Location: student-record.php");
+    } else {
+        echo "Update failed: " . mysqli_error($conn);
+    }
+}
+
 ?> 
 <!DOCTYPE html>
 <html lang="en">
