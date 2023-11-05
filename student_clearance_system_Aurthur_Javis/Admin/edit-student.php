@@ -226,7 +226,7 @@ if (isset($_GET['edit']) && $_GET['edit'] == 1) {
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-        <button type="submit" name="btnedit" class="btn btn-primary">Update</button>
+                <button type="submit" name="edit-student" class="btn btn-primary">Update</button>
     </div>
 </form>
 
