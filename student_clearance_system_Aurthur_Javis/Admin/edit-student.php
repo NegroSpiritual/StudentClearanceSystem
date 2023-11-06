@@ -44,6 +44,7 @@ if (isset($_GET['edit']) && $_GET['edit'] == 1) {
         }
     }
 }
+}
 
 // Now, outside of the retrieval logic, handle the form submission and update
 if (isset($_POST['edit-student'])) {
