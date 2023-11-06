@@ -507,5 +507,125 @@ $tot_fee=$row_fee['tot_fee'];
             });
         });
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: auto;
+        }
+
+        .popup-box {
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            background-color: #fff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup-head {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .popup-head-text {
+            font-weight: bold;
+        }
+
+        .popup-close {
+            cursor: pointer;
+        }
+
+        .popup-messages {
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        .popup-input {
+            display: flex;
+            padding: 10px;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        #send-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <div class="chat-popup">
+        <div class="popup-box">
+            <div class="popup-head">
+                <div class="popup-head-text">Chatbot</div>
+                <div class="popup-close">X</div>
+            </div>
+            <div class="popup-messages" id="chatbox">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="popup-input">
+                <input type="text" id="user-input" placeholder="Type a message..." />
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatbox = document.getElementById("chatbox");
+            const userInput = document.getElementById("user-input");
+            const sendBtn = document.getElementById("send-btn");
+
+            sendBtn.addEventListener("click", function () {
+                const userMessage = userInput.value.trim();
+                if (userMessage !== "") {
+                    appendMessage("You", userMessage);
+
+                    // Send user message to the backend for processing
+                    fetch('chatbot_backend.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'userMessage=' + encodeURIComponent(userMessage),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Display the chatbot response
+                        appendMessage("Chatbot", data.message);
+                    })
+                    .catch(error => console.error('Error:', error));
+
+                    userInput.value = "";
+                }
+            });
+
+            function appendMessage(sender, message) {
+                const messageDiv = document.createElement("div");
+                messageDiv.className = "message";
+                messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+                chatbox.appendChild(messageDiv);
+                chatbox.scrollTop = chatbox.scrollHeight;
+            }
+        });
+    </script>
 </body>
 </html>
